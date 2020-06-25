@@ -1,6 +1,8 @@
 #!/bin/bash
 
 GO_INSTALL_PATH='/usr/local/go'
+PROFILE_FILE='/etc/profile'
+EXPORT_LINE='export PATH=$PATH:/usr/local/go/bin'
 PWD=$(pwd)
 
 GO_VERSION=${1:-'1.13.5'}
@@ -24,6 +26,11 @@ install_go () {
     sudo tar -C /usr/local -xzf "$PWD/$GO_TAR"
     rm "$PWD/$GO_TAR"
     echo "Golang $GO_VERSION installed"
+    if [ -d $GO_INSTALL_PATH ]; then
+      if [[ -z $(grep "$EXPORT_LINE" "$PROFILE_FILE") ]]; then
+        echo $EXPORT_LINE | sudo tee -a $PROFILE_FILE > /dev/null
+      fi
+    fi
   fi
 }
 
