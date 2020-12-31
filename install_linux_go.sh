@@ -2,6 +2,7 @@
 
 GO_INSTALL_PATH='/usr/local/go'
 PROFILE_FILE='/etc/profile'
+ZPROFILE_FILE='/etc/zsh/zprofile'
 EXPORT_LINE='export PATH=$PATH:/usr/local/go/bin'
 PWD=$(pwd)
 
@@ -29,6 +30,9 @@ install_go () {
     if [ -d $GO_INSTALL_PATH ]; then
       if [[ -z $(grep "$EXPORT_LINE" "$PROFILE_FILE") ]]; then
         echo $EXPORT_LINE | sudo tee -a $PROFILE_FILE > /dev/null
+      fi
+      if [[ -z $(grep "$EXPORT_LINE" "$ZPROFILE_FILE") ]]; then
+        echo $EXPORT_LINE | sudo tee -a $ZPROFILE_FILE > /dev/null
       fi
     fi
   fi
