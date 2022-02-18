@@ -6,8 +6,9 @@ ZPROFILE_FILE='/etc/zsh/zprofile'
 EXPORT_LINE='export PATH=$PATH:/usr/local/go/bin'
 PWD=$(pwd)
 
-GO_VERSION=${1:-'1.13.5'}
-GO_TAR="go$GO_VERSION.linux-amd64.tar.gz"
+GO_VERSION=${1:-'1.16'}
+ARCHITECTURE=${2:-"amd64"}
+GO_TAR="go$GO_VERSION.linux-$ARCHITECTURE.tar.gz"
 
 DOWNLOAD_URL="https://dl.google.com/go/$GO_TAR"
 
